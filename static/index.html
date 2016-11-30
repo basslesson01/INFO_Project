@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Adjusts screen size scaling(?) on Desktop screens and Mobile screens -->
+    <meta name="author" content="Leon Kim">
+    <title>YouTube Links!?</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Cool fonts -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+    <!-- Theme CSS. ALL THE STYLING IS IN THIS THING -->
+    <link href="css/grayscale.css" rel="stylesheet">
+
+    <!-- Angular.js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript" src="js/ourController.js"></script>
+  </head>
+
+  <body id="page-top" data-target=".navbar-fixed-top" ng-app="SigninApp">
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse"> Menu <i class="fa fa-bars"></i></button>
+          <a class="navbar-brand page-scroll" href="#page-top">
+            <i class="fa fa-play-circle"></i> <span class="light">Home</span>
+          </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+          <ul class="nav navbar-nav">
+          <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+            <li class="hidden">
+              <a href="#page-top"></a>
+            </li>
+            <li>
+              <a class="page-scroll" href="#login">Login</a>
+            </li>
+            <li>
+              <a class="page-scroll" href="#myLinks">My Audios</a>
+            </li>
+            <li>
+              <a class="page-scroll" href="#allLinks">All Audios</a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="intro">
+      <div class="intro-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <h1 class="brand-heading">Audio Storage</h1>
+              <p class="intro-text">(w/ YouTube Links)</p>
+              <a href="#footer" class="btn btn-circle page-scroll">
+                <i class="fa fa-angle-double-down animated"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div ng-controller="SigninController">
+    <section id="login" class="container content-section text-center">
+      <form id="loginForm" class="form-horizontal">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2">
+            <h2>Login Form</h2>
+            <div id="username-group" class="form-group">
+              <label for="username" class="col-sm-2 control-label">Username: </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="username" id="username" placeholder="UNB Username" required ng-model="user.username">
+              </div>
+            </div>
+            <div id="password-group" class="form-group">
+              <label for="password" class="col-sm-2 control-label">Password: </label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" name="password" id="password" placeholder="UNB Password" required ng-model="user.password">
+              </div>
+            </div>
+            <div class="form-group">
+              <ul class="list-inline banner-social-buttons">
+                <li>
+                  <button type="button" class="btn btn-default btn-lg" ng-click="signin(user)" ng-if="!session['inSession']"><i class="fa fa-sign-in" aria-hidden="true"> Login</i></button>
+                </li>
+                <li>
+                  <button type="button" class="btn btn-default btn-lg" ng-click="signout()" ng-if="session['inSession']">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></button>
+                </li>
+              </ul>
+            </div>
+            <p>{{message}}</p>
+          </div>
+        </div>
+      </form>
+    </section>
+    </div>
+
+    <!--
+    <div ng-controller="SigninController">
+    <section id="login" class="container content-section text-center">
+    <form id="signinForm">
+        <div id="username-group" class="form-group">
+            <label for="username">Username: </label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="UNB Username" required ng-model="user.username">
+        </div>
+
+        <div id="password-group" class="form-group">
+            <label for="password">Password: </label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="UNB password" required ng-model="user.password">
+        </div>
+
+        <button type="button" class="btn btn-default btn-lg" ng-click="signin(user)" ng-if="!session['inSession']"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click="signout()" ng-if="session['inSession']">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></button>
+				<p>{{message}}</p>
+    </form>
+    </section>
+    </div>
+    -->
+    <hr size="30"> <!-- Random divider, because background is too dark -->
+
+    <!-- My audio links section, probably should go on another page -->
+    <section id="myLinks" class="content-section text-center">
+      <div ng-if="true" class="myLinks-section">
+        <div class="container">
+          <div class="col-lg-8 col-lg-offset-2">
+            <h2>My audio Links</h2>
+            <p>Links go here</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr size="30">
+
+    <!-- All audio links Section, probably should go on another page too -->
+    <section id="allLinks" class="container content-section text-center">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <h2>All the audio links</h2>
+          <button type="button" class="btn btn-default btn-lg" ng-click="getAllSongs()">ALL SONGS</button>
+          <ul>
+            <li>
+              Lorem Ipsum
+            </li>
+          </ul>
+          <p>{{message}}</p>
+        </div>
+      </div> <!-- End of row -->
+    </section>
+
+    <hr size="30">
+
+    <!-- Cool footer -->
+    <footer id="footer">
+        <div class="container text-center">
+            <p>Cool copyright logo --> &copy; CS Wiz'</p>
+        </div>
+    </footer>
+
+  </body>
+
+</html>
